@@ -151,3 +151,6 @@ git push    # 推送到已关联的远程仓库
 - `git stash` — 暂存未完成的工作
 - `git rebase` — 变基
 - `git cherry-pick` — 挑选提交
+## Day2：Clone & Pull 练习
+
+这是从 clone 仓库添加的内容，模拟另一位开发者。
