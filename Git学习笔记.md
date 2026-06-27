@@ -154,3 +154,10 @@ git push    # 推送到已关联的远程仓库
 ## Day2：Clone & Pull 练习
 
 这是从 clone 仓库添加的内容，模拟另一位开发者。
+
+## GitHub协作流程
+
+1. `git clone` — 克隆仓库
+2. `git pull` — 拉取更新
+3. `git fetch` — 仅下载不合并
+4. `Pull Request` — GitHub上发起代码合并请求
