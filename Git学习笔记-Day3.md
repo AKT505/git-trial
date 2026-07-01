@@ -68,6 +68,64 @@ git cherry-pick --skip                # 跳过这个提交，继续下一个
 
 ---
 
+## 第十五课：`git log` 高级筛选
+
+### 常用搜索命令
+```bash
+git log --oneline --author="名字"     # 按作者筛选提交
+git log --oneline --grep="关键词"     # 搜索提交信息中的关键词
+git log --oneline --since="日期"      # 从某日期开始
+git log --oneline --until="日期"      # 到某日期为止
+git log --oneline -3                  # 只看最近 3 条
+git log --oneline -- <文件名>         # 只看某个文件的提交历史
+git log --stat -3                     # 最近 3 条 + 增删统计
+git log --oneline --graph --all       # 图形化显示所有分支
+```
+
+### 组合使用
+多个参数可以同时使用：
+```bash
+git log --oneline --author="AKT" --since="2026-06-01" -- feature.txt
+```
+查找某个作者在某日期之后对某文件的所有提交。
+
+---
+
+## 第十六课：`.gitignore` 文件
+
+### 作用
+忽略不需要 Git 跟踪的文件：
+- 编译产物：`*.exe`、`*.class`、`node_modules/`
+- 密钥文件：`*.env`、`*.key`
+- 系统垃圾：`Thumbs.db`、`.DS_Store`
+- 日志/临时文件：`*.log`、`*.tmp`
+
+### 规则语法
+| 规则 | 含义 | 示例匹配 |
+|------|------|----------|
+| `*.log` | 所有 `.log` 结尾的文件 | `debug.log`、`error.log` |
+| `*.env` | 所有 `.env` 结尾的文件 | `secret.env`、`.env` |
+| `temp/` | 整个目录 | `temp/` 下的所有文件 |
+| `.env` | 仅名为 `.env` 的文件 | `.env`（不匹配 `app.env`） |
+| `# 注释` | 注释行，被忽略 | — |
+
+### ⚠️ 注意事项
+- 规则每行前面**不能有空格**
+- `.gitignore` 本身需要提交到仓库
+- 已经跟踪过的文件不会被 `.gitignore` 忽略（需要先 `rm --cached`）
+
+---
+
+## 编辑器配置
+
+```bash
+git config --global core.editor "code --wait"
+```
+- 以后 `git commit`（不带 `-m`）、`git rebase -i` 等操作会在 VS Code 中打开
+- 保存并关闭文件 = 确认，无需面对 Vim
+
+---
+
 ## 常用命令速查
 
 | 命令 | 用途 |
@@ -76,3 +134,9 @@ git cherry-pick --skip                # 跳过这个提交，继续下一个
 | `git cherry-pick --abort` | 中止 cherry-pick |
 | `git cherry-pick --continue` | 解决冲突后继续 cherry-pick |
 | `git cherry-pick --skip` | 跳过当前提交 |
+| `git log --author="名字"` | 按作者筛选提交 |
+| `git log --grep="关键词"` | 按提交信息搜索 |
+| `git log --since="日期"` | 从某日期开始的提交 |
+| `git log --stat` | 显示每个提交的增删统计 |
+| `git log -- <文件>` | 查看某文件的提交历史 |
+| `git config --global core.editor "code --wait"` | 设置 VS Code 为默认编辑器 |
